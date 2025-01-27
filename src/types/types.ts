@@ -28,6 +28,9 @@ export interface User {
     id: number;
     name: string;
     email: string;
+
+    // Add the advertiser property
+    advertiser?: Advertiser | null;
 }
 
 export interface Advertiser {
@@ -35,7 +38,7 @@ export interface Advertiser {
     user_id: number;
     name: string;
     email: string;
-    advertiser_id: number;
+    // advertiser_id: number;
 }
 
 export interface AuthContextProps {
