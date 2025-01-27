@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent, useContext, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import api from '../services/api';
 import {
     Box,
     TextField,
@@ -10,7 +11,7 @@ import {
     Alert,
     CircularProgress,
 } from '@mui/material';
-import {  CampaignFormValues } from '../types/types';
+import {  CreateCampaignPayload, CampaignFormValues } from '../types/types';
 
 const countries = ['Estonia', 'Spain', 'Bulgaria'] as const;
 
@@ -67,7 +68,7 @@ function CampaignForm() {
         const updatedPayouts = [...values.payouts];
         updatedPayouts[index] = {
             ...updatedPayouts[index],
-            [field]: value,
+            [field]: field === 'payout_value' ? Number(value) : value,
         };
         setValues((prev) => ({
             ...prev,
@@ -100,14 +101,14 @@ function CampaignForm() {
         setSnackbarSeverity('error');
 
         try {
-            // const payload: CreateCampaignPayload = {
-            //     advertiser_id: Number(values.advertiser_id),
-            //     title: values.title,
-            //     landing_page_url: values.landing_page_url,
-            //     payouts: values.payouts,
-            // };
+            const payload: CreateCampaignPayload = {
+                advertiser_id: Number(values.advertiser_id),
+                title: values.title,
+                landing_page_url: values.landing_page_url,
+                payouts: values.payouts,
+            };
 
-            // const response = await api.post('/campaigns', payload);
+            await api.post('/campaigns', payload);
 
             showToast('Campaign created successfully!', 'success');
 

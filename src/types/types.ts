@@ -60,7 +60,7 @@ export interface CampaignFormValues {
     advertiser_id: string;
     title: string;
     landing_page_url: string;
-    payouts: { country: string; payout_value: number }[];
+    payouts: PayoutInput[];
 }
 
 
