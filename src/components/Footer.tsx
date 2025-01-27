@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
             }}
         >
             <Typography variant="body1">
-                © {new Date().getFullYear()} Adcash Test
+                © {new Date().getFullYear()} Ad cash Test
             </Typography>
             <Typography variant="body2" color="text.secondary">
                 <Link href="#" color="inherit" underline="hover">
