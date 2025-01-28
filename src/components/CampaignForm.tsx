@@ -18,6 +18,7 @@ const countries = ['Estonia', 'Spain', 'Bulgaria'] as const;
 
 function CampaignForm() {
     const { user } = useContext(AuthContext);
+    const MAX_PAYOUTS = 3;
 
     const [values, setValues] = useState<CampaignFormValues>({
         advertiser_id: user?.advertiser?.id?.toString() || '',
@@ -77,6 +78,11 @@ function CampaignForm() {
     };
 
     const addPayoutRow = () => {
+        if (values.payouts.length >= MAX_PAYOUTS) {
+            showToast('You can only add up to 3 payout entries.', 'error');
+            return;
+        }
+
         setValues((prev) => ({
             ...prev,
             payouts: [...prev.payouts, { country: 'Estonia', payout_value: 0 }],
@@ -203,6 +209,7 @@ function CampaignForm() {
                     error={!!errors.title}
                     helperText={errors.title}
                 />
+
                 <TextField
                     label="Landing Page URL"
                     name="landing_page_url"
@@ -261,7 +268,12 @@ function CampaignForm() {
                     </Typography>
                 )}
 
-                <Button variant="outlined" onClick={addPayoutRow}>
+                <Button
+                    variant="outlined"
+                    onClick={addPayoutRow}
+                    disabled={values.payouts.length >= MAX_PAYOUTS}
+
+                >
                     Add Another Country Payout
                 </Button>
 
