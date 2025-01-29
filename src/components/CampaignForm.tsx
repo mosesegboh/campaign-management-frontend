@@ -34,6 +34,7 @@ function CampaignForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
+        console.log(user, '')
         if (user?.advertiser?.id) {
             setValues((prev) => ({
                 ...prev,
