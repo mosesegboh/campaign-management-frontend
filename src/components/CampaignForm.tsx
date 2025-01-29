@@ -34,7 +34,6 @@ function CampaignForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log(user, '')
         if (user?.advertiser?.id) {
             setValues((prev) => ({
                 ...prev,
@@ -192,16 +191,6 @@ function CampaignForm() {
                     width: '100%',
                 }}
             >
-                <TextField
-                    label="Advertiser ID"
-                    name="advertiser_id"
-                    value={values.advertiser_id}
-                    disabled
-                    error={!!errors.advertiser_id}
-                    helperText={errors.advertiser_id}
-                    type="number"
-                    InputProps={{ inputProps: { min: 1 } }}
-                />
                 <TextField
                     label="Campaign Title"
                     name="title"
